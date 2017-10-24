@@ -7,11 +7,11 @@
 
 ## 用户注册
 
-    agenda register -uUserName --password pass --email=a@xxx.com --phone=xxxxxx
+    agenda register --un=UserName --pw=password --email=a@xxx.com --phone=xxxxxx
 
 ## 用户登录
 
-    agenda login -uUserName --password pass
+    agenda login --un=UserName --pw=password
 
 ## 用户登出
 
@@ -19,7 +19,7 @@
 
 ## 用户查询
 
-    agenda query
+    agenda query --un=UserName
 
 ## 用户删除
 

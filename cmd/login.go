@@ -20,9 +20,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// registerCmd represents the register command
-var registerCmd = &cobra.Command{
-	Use:   "register",
+// loginCmd represents the login command
+var loginCmd = &cobra.Command{
+	Use:   "login",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -31,28 +31,27 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		username, _ := cmd.Flags().GetString("un")
-		password, _ := cmd.Flags().GetString("pw")
-		email, _ := cmd.Flags().GetString("email")
-		phone, _ := cmd.Flags().GetString("phone")
-		fmt.Println("register args : ", username, password, email, phone)
+		un, _ := cmd.Flags().GetString("un")
+		pw, _ := cmd.Flags().GetString("pw")
+		fmt.Println("login args : ", un, pw)
 	},
 }
 
+var (
+	username, password *string
+)
+
 func init() {
-	RootCmd.AddCommand(registerCmd)
+	RootCmd.AddCommand(loginCmd)
 
 	// Here you will define your flags and configuration settings.
-	registerCmd.Flags().StringP("un", "u", "", "an unregisted username")
-	registerCmd.Flags().StringP("pw", "pw", "", "your password must have both number and character")
-	registerCmd.Flags().StringP("email", "e", "", "a valid email address")
-	registerCmd.Flags().StringP("phone", "ph", "", "a valid phone number")
-	
+	username = loginCmd.Flags().StringP("un", "u", "", "agenda username")
+	password = loginCmd.Flags().StringP("pw", "pw","","agenda password")
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// registerCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// loginCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// registerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// loginCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

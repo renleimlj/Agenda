@@ -20,9 +20,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// registerCmd represents the register command
-var registerCmd = &cobra.Command{
-	Use:   "register",
+// queryCmd represents the query command
+var queryCmd = &cobra.Command{
+	Use:   "query",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -31,28 +31,21 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		username, _ := cmd.Flags().GetString("un")
-		password, _ := cmd.Flags().GetString("pw")
-		email, _ := cmd.Flags().GetString("email")
-		phone, _ := cmd.Flags().GetString("phone")
-		fmt.Println("register args : ", username, password, email, phone)
+		un, _ := cmd.Flags().GetString("un")
+		fmt.Println("queryuser args : ", un)
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(registerCmd)
+	RootCmd.AddCommand(queryCmd)
 
 	// Here you will define your flags and configuration settings.
-	registerCmd.Flags().StringP("un", "u", "", "an unregisted username")
-	registerCmd.Flags().StringP("pw", "pw", "", "your password must have both number and character")
-	registerCmd.Flags().StringP("email", "e", "", "a valid email address")
-	registerCmd.Flags().StringP("phone", "ph", "", "a valid phone number")
-	
+	queryCmd.Flags().StringP("un", "u", "", "query user's information")
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// registerCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// queryCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// registerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// queryCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
