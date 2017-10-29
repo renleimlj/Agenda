@@ -15,36 +15,43 @@
 package cmd
 
 import (
-	"fmt"
+  "fmt"
 
-	"github.com/spf13/cobra"
+  "github.com/spf13/cobra"
 )
 
 // delPrCmd represents the delPr command
 var delPrCmd = &cobra.Command{
-	Use:   "delPr",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
+  Use:   "delPr",
+  Short: "A brief description of your command",
+  Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("delPr called")
-	},
+  Run: func(cmd *cobra.Command, args []string) {
+    title, _ := cmd.Flags().GetString("title") 
+    prs, _ := cmd.Flags().GetString("pr") 
+    prs_arr := strings.Split(prs, ",") 
+    for _, each := range prs_arr { 
+      meeting.DeleteParticipant(title, each) 
+    }
+  },
 }
 
 func init() {
-	RootCmd.AddCommand(delPrCmd)
+  RootCmd.AddCommand(delPrCmd)
 
-	// Here you will define your flags and configuration settings.
+  // Here you will define your flags and configuration settings.
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// delPrCmd.PersistentFlags().String("foo", "", "A help for foo")
+  // Cobra supports Persistent Flags which will work for this command
+  // and all subcommands, e.g.:
+  // delPrCmd.PersistentFlags().String("foo", "", "A help for foo")
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// delPrCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  // Cobra supports local flags which will only run when this command
+  // is called directly, e.g.:
+  // delPrCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+  delPrCmd.Flags().StringP("title", "t", "", "The title of the meeting the pr wanting to quit.")
+  delPrCmd.Flags().StringP("pr", "p", "", "The pr wanting to quit. Please split by ",".") 
 }
