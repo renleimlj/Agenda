@@ -79,13 +79,34 @@ func PathExists(path string) (bool, error) {
 }
 
 func Logout() int {
-	_, e := PathExists("CurUser")
-	if e == nil {
+	b, _ := PathExists("CurUser")
+	if b == true {
 		os.Remove("CurUser")
 		return 0
 	} else {
 		return 1
 	}
+}
+
+func Query(username string) (string, int) {
+	b, _ := PathExists("CurUser")
+	if b != true {
+		return "falied", 2
+	}
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		panic(err)
+	}
+	decoder := json.NewDecoder(file)
+	for decoder.More() {
+		var users User
+		decoder.Decode(&users)
+		if users.Name == username {
+			var response string = "Name: " + users.Name + "\n" + "Email: " + users.Email + "\n" + "Phone: " + users.Phone + "\n"
+			return response, 0
+		}
+	}
+	return "failed", 1
 }
 
 func (u User) GetName() string {
