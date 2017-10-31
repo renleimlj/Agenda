@@ -1,10 +1,11 @@
-package object
+package entity
 
 // Meeting :
 
 import (
   "strings"
   "fmt"
+  "time"
 
 )
 
@@ -13,10 +14,10 @@ type Meeting struct {
   Spon string
   Pr []string  
   Start string
-  End string 
+  End string
 }
 
-func (meeting Meeting) init(Pr []string, St string, Et string, Title string) {
+func (meeting Meeting) Init(Pr []string, St string, Et string, Title string) {
   meeting.Pr = Pr
   meeting.Start = St
   meeting.End = Et
@@ -74,16 +75,57 @@ func (meeting Meeting) SetTitle(Title string) {
 }
 
 func (meeting Meeting) IsParticipator(Un string) bool {
+  if Un == "" {
+    fmt.Println("Null Participator Name!")
+    return false
+  }
   var i int
   for i= 0; i< len(meeting.Pr); i++ {
     if strings.EqualFold(meeting.Pr[i], Un)== true {
-        return true
+      return true
+    }
+  }
+  return false
+}
+
+func CheckIfMeetingTimeOverlap(startTime string, endTime string) bool {
+  meetingsList := getAllMeetings(); 
+  for tit, meeting := range meetingsList; {
+    if meeting.Start < endTime && meeting.Start > startTime {
+      return true
+    } else if meeting.End < endTime && meeting.End > startTime{
+      return true
+    }
+  }
+  return false
+}
+
+func CheckIfPrTimeOverlap(Un string, startTime string, endTime string) bool {
+  flag := CheckIfMeetingTimeOverlap(startTime, endTime)
+  if flag == true {
+    return true
+  } else {
+    meetingsList := getAllMeetings(); 
+    for tit, meeting := range meetingsList; {
+      for pr := meeting.Pr {
+        if pr == Un || meeting.spon == Un {
+          if meeting.Start < endTime && meeting.Start > startTime {
+            return true
+          } else if meeting.End < endTime && meeting.End > startTime{
+            return true
+          }
+        }
+      }
     }
   }
   return false
 }
 
 func (meeting Meeting) DeleteParticipator(Un string) {
+  if Un == "" {
+    fmt.Println("Null Participator Name!")
+    return
+  }
   var i int
   num := len(meeting.Pr)
   for i= 0; i< num; i++ {
@@ -94,12 +136,15 @@ func (meeting Meeting) DeleteParticipator(Un string) {
   }
   num = len(meeting.Pr)
   if num == 0 {
-    //delete meeting
+    DeleteMeeting(meeting.Title)
   }
 }
 
 func (meeting Meeting) AddParticipator(Un string) bool {
-  // if time not overlap
+  if Un == "" {
+    fmt.Println("Null Participator Name!")
+    return false
+  }
   var i int
   var flag bool
   flag = true
@@ -112,11 +157,40 @@ func (meeting Meeting) AddParticipator(Un string) bool {
     }
   }
   if flag == true {
+      // if time not overlap
+    isOverlap := checkIfPrTimeOverlap(Un, meetings.Start, meetings.End)
+    if isOverlap == true {
+      fmt.Println("Overlap\n")
+      return false
+    }
     meeting.Pr = append(meeting.Pr, un)
     return true
   }
   return false
 }
 
+func QueryMeetingByTitle(Title string) Meeting {
+  meetingsList := getAllMeetings();
+  var count int
+  for title, meeting := range meetingsList; i++ {
+    if title == Title {
+      fmt.Println("The meeting you search exits!\n")
+      return meeting
+    }
+  }
 
+  fmt.Println("No such meeting!\n") 
+  return nil
+}
+
+/*
+func DeleteMeeting(Title string) {
+    
+}
+
+
+func ClearMeeting() {
+    
+}
+*/
 
