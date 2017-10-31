@@ -59,7 +59,7 @@ func (meeting Meeting) GetTitle() string {
   return meeting.title
 }
 
-func _meeting Meeting) SetTitle(title string) {
+func (meeting Meeting) SetTitle(title string) {
   meeting.title = title
 }
 

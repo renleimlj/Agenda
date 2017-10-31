@@ -16,7 +16,7 @@ package cmd
 
 import (
 	"fmt"
-
+	"Agenda/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -36,6 +36,22 @@ to quickly create a Cobra application.`,
 		email, _ := cmd.Flags().GetString("email")
 		phone, _ := cmd.Flags().GetString("phone")
 		fmt.Println("register args : ", username, password, email, phone)
+		if username == "" {
+			fmt.Println("please input username")
+		} else if password == "" {
+			fmt.Println("please input password")
+		} else if email == "" {
+			fmt.Println("please input email")
+		} else if phone == "" {
+			fmt.Println("please input phone")
+		} else {
+			tmp := entity.Register(username, password, email, phone)
+			if tmp == 0 {
+				fmt.Println("register successfully")
+			} else {
+				fmt.Println("the username is not available")
+			}
+		}
 	},
 }
 
