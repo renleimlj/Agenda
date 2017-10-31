@@ -46,7 +46,7 @@ func init() {
 
 	// Here you will define your flags and configuration settings.
 	username = loginCmd.Flags().StringP("un", "u", "", "agenda username")
-	password = loginCmd.Flags().StringP("pw", "pw","","agenda password")
+	password = loginCmd.Flags().StringP("pw", "p","","agenda password")
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
 	// loginCmd.PersistentFlags().String("foo", "", "A help for foo")

@@ -44,9 +44,9 @@ func init() {
 
 	// Here you will define your flags and configuration settings.
 	registerCmd.Flags().StringP("un", "u", "", "an unregisted username")
-	registerCmd.Flags().StringP("pw", "pw", "", "your password must have both number and character")
+	registerCmd.Flags().StringP("pw", "p", "", "your password must have both number and character")
 	registerCmd.Flags().StringP("email", "e", "", "a valid email address")
-	registerCmd.Flags().StringP("phone", "ph", "", "a valid phone number")
+	registerCmd.Flags().StringP("phone", "c", "", "a valid phone number")
 	
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
