@@ -88,6 +88,22 @@ func Logout() int {
 	}
 }
 
+func UserExists(username string) bool {
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		panic(err)
+	}
+	decoder := json.NewDecoder(file)
+	for decoder.More() {
+		var users User
+		decoder.Decode(&users)
+		if users.Name == username {
+			return true
+		}
+	}
+	return false;
+}
+
 func Query(username string) (string, int) {
 	b, _ := PathExists("CurUser")
 	if b != true {
