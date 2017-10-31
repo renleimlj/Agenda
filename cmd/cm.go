@@ -35,7 +35,8 @@ to quickly create a Cobra application.`,
 		pr,_:= cmd.Flags().GetString("pr")
 		st,_:=cmd.Flags().GetString("st")
 		et,_:=cmd.Flags().GetString("et")
-		fmt.Println("cm called:\ntitle: "+title+"\nparticipator: "+pr+"\nstart time: "+st+"\nend time: "+et)
+		//fmt.Println("cm called:\ntitle: "+title+"\nparticipator: "+pr+"\nstart time: "+st+"\nend time: "+et)
+		entity.createMeeting(title, pr, st, et)
 	},
 }
 
