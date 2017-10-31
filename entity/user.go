@@ -38,6 +38,56 @@ func Register(name, password, email, phone string) int {
 	return 0
 }
 
+func Login(name, password string) int {
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		panic(err)
+	}
+	decoder := json.NewDecoder(file)
+	for decoder.More() {
+		var users User
+		decoder.Decode(&users)
+		if users.Name == name { // 存在该用户名
+			if users.Password == password {
+				os.Remove("CurUser")
+				file2, err2 := os.OpenFile("CurUser", os.O_RDWR|os.O_CREATE, 0666)
+				if err2 != nil {
+					panic(err2)
+				}
+				encoder := json.NewEncoder(file2)
+				encoder.Encode(users.Name)
+				file2.Close()
+				file.Close()
+				return 0
+			} else {
+				return 1
+			}
+		}
+	}
+	return 1
+}
+
+func PathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
+}
+
+func Logout() int {
+	_, e := PathExists("CurUser")
+	if e == nil {
+		os.Remove("CurUser")
+		return 0
+	} else {
+		return 1
+	}
+}
+
 func (u User) GetName() string {
 	return u.Name;
 }
