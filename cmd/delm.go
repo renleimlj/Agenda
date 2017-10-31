@@ -32,7 +32,8 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		meeting,_:=cmd.Flags().GetString("title")
-		fmt.Println("meeting " + meeting + " will be deleted")
+		//fmt.Println("meeting " + meeting + " will be deleted")
+		entity.deleteMeeting(meeting)
 	},
 }
 
