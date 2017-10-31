@@ -13,10 +13,9 @@
 // limitations under the License.
 
 package cmd
-
+/* 
 import (
-	"fmt"
-
+	"Agenda/entity"
 	"github.com/spf13/cobra"
 )
 
@@ -36,7 +35,7 @@ to quickly create a Cobra application.`,
 		st,_:=cmd.Flags().GetString("st")
 		et,_:=cmd.Flags().GetString("et")
 		//fmt.Println("cm called:\ntitle: "+title+"\nparticipator: "+pr+"\nstart time: "+st+"\nend time: "+et)
-		entity.createMeeting(title, pr, st, et)
+		entity.CreateMeeting(title, pr, st, et)
 	},
 }
 
@@ -57,3 +56,4 @@ func init() {
 	// is called directly, e.g.:
 	// cmCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
+ */

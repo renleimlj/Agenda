@@ -4,7 +4,6 @@ package entity
 
 import (
   "fmt"
-  "time"
   "os"
   "encoding/json"
   "strings"
@@ -52,7 +51,7 @@ func (meeting Meeting) GetStartTime() string {
   return meeting.Start
 }
 
-func (meeting Meeting) SetStartTime() (St string) {
+func (meeting Meeting) SetStartTime(St string) {
   meeting.Start = St
 }
 
@@ -68,7 +67,7 @@ func (meeting Meeting) GetEndTime() string {
   return meeting.End
 }
 
-func (meeting Meeting) SetEndTime() (Et string) {
+func (meeting Meeting) SetEndTime(Et string) {
   meeting.End = Et
 }
 
@@ -96,7 +95,7 @@ func (meeting Meeting) IsParticipator(Un string) bool {
 
 func CheckIfMeetingTimeOverlap(startTime string, endTime string) bool {
   meetingsList := getAllMeetings(); 
-  for tit, meeting := range meetingsList; {
+  for _, meeting := range meetingsList {
     if meeting.Start < endTime && meeting.Start > startTime {
       return true
     } else if meeting.End < endTime && meeting.End > startTime{
@@ -110,19 +109,6 @@ func CheckIfPrTimeOverlap(Un string, startTime string, endTime string) bool {
   flag := CheckIfMeetingTimeOverlap(startTime, endTime)
   if flag == true {
     return true
-  } else {
-    meetingsList := getAllMeetings(); 
-    for tit, meeting := range meetingsList; {
-      for pr := meeting.Pr {
-        if pr == Un || meeting.spon == Un {
-          if meeting.Start < endTime && meeting.Start > startTime {
-            return true
-          } else if meeting.End < endTime && meeting.End > startTime{
-            return true
-          }
-        }
-      }
-    }
   }
   return false
 }
@@ -135,7 +121,7 @@ func (meeting Meeting) DeleteParticipator(Un string) {
   var i int
   num := len(meeting.Pr)
   for i= 0; i< num; i++ {
-    if strings.EqualFold(meeting.Pr[i], un) == true {
+    if strings.EqualFold(meeting.Pr[i], Un) == true {
       meeting.Pr = append(meeting.Pr[:i], meeting.Pr[i+1:]...)
       break
     }
@@ -164,9 +150,9 @@ func (meeting Meeting) AddParticipator(Un string) bool {
   }
   if flag == true {
       // if time not overlap
-    isOverlap := checkIfPrTimeOverlap(Un, meetings.Start, meetings.End)
+    isOverlap := CheckIfPrTimeOverlap(Un, meeting.Start, meeting.End)
     if isOverlap == true {
-      fmt.Println("Overlap\n")
+      fmt.Println("Overlap")
       return false
     }
     meeting.Pr = append(meeting.Pr, Un)
@@ -177,16 +163,16 @@ func (meeting Meeting) AddParticipator(Un string) bool {
 
 func QueryMeetingByTitle(Title string) Meeting {
   meetingsList := getAllMeetings();
-  var count int
-  for title, meeting := range meetingsList; i++ {
+  for title, meeting := range meetingsList {
     if title == Title {
-      fmt.Println("The meeting you search exits!\n")
+      fmt.Println("The meeting you search exits!")
       return meeting
     }
   }
 
-  fmt.Println("No such meeting!\n") 
-  return nil
+  fmt.Println("No such meeting!") 
+  var m Meeting
+  return m
 }
 
 
@@ -241,7 +227,7 @@ func saveAllMeetings(in map[string]Meeting) {
   fout.Write(bytes)
 }
 
-func createMeeting(title string, pr string, st string, et string) {
+func CreateMeeting(title string, pr string, st string, et string) {
   allMeetings := map[string]Meeting{}
   allMeetings = getAllMeetings()
   bytes,_ := ioutil.ReadFile("../CurUser")
@@ -274,7 +260,7 @@ func createMeeting(title string, pr string, st string, et string) {
   saveAllMeetings(allMeetings)
 }
 
-func deleteMeeting(title string) {
+func DeleteMeeting(title string) {
   bytes,_ := ioutil.ReadFile("../CurUser")
   curuser := string(bytes)
 
