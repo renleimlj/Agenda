@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package cmd
-/*
+
 import (
   "github.com/spf13/cobra"
   "strings"
@@ -58,4 +58,4 @@ func init() {
   // delPrCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
   delPrCmd.Flags().StringP("title", "t", "", "The title of the meeting the pr wanting to quit.")
   delPrCmd.Flags().StringP("pr", "p", "", "The pr wanting to quit. Please split by ",".") 
-}*/
+}

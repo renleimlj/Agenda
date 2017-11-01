@@ -13,7 +13,7 @@
 // limitations under the License.
 
 package cmd
-/*
+
 import (
   "github.com/spf13/cobra"
   "Agenda/logger"
@@ -57,5 +57,5 @@ func init() {
   // addPrCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
   addPrCmd.Flags().StringP("title", "t", "", "The title of the meeting the pr wanting to add in.")
   addPrCmd.Flags().StringP("pr", "p", "", "The pr wanting to add in.Please split by ",".") 
-}*/
+}
 
