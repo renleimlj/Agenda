@@ -15,8 +15,6 @@
 package cmd
 
 import (
-  "fmt"
-
   "github.com/spf13/cobra"
 )
 
@@ -55,3 +53,4 @@ func init() {
   addPrCmd.Flags().StringP("title", "t", "", "The title of the meeting the pr wanting to add in.")
   addPrCmd.Flags().StringP("pr", "p", "", "The pr wanting to add in.Please split by ",".") 
 }
+

@@ -16,7 +16,7 @@ package cmd
 
 import (
 	"fmt"
-	"Agenda/entity"
+	"../entity"
 	"github.com/spf13/cobra"
 )
 
