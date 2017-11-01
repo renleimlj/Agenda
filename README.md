@@ -1,5 +1,8 @@
 # Agenda
 
+## help
+![此处输入图片的描述][15]
+
 ## 用户注册
 
  1. 注册新用户时，用户需设置一个唯一的用户名和一个密码。另外，还需登记邮箱及电话信息。
@@ -63,6 +66,24 @@
 
 ![此处输入图片的描述][11]
 
+## 创建会议
+
+###### 1.会议名是否已经存在 
+###### 2.所有参与者是否存在
+###### 3.会议的开始时间是否在结束时间之前
+###### 4.新会议是否和发起者参与者其他会议有时间冲突
+
+###### 当前用户是has,现有会议：
+![此处输入图片的描述][12]
+###### 测试：
+![此处输入图片的描述][13]
+
+## 取消会议
+
+###### 用户可以取消自己作为sponser的会议
+![此处输入图片的描述][14]
+
+
 
   [1]: https://s1.ax2x.com/2017/10/31/BCH5S.png
   [2]: https://s1.ax2x.com/2017/10/31/BCVQu.png
@@ -75,3 +96,7 @@
   [9]: https://s1.ax2x.com/2017/10/31/BCM9d.png
   [10]: https://s1.ax2x.com/2017/10/31/BCOOR.png
   [11]: https://s1.ax2x.com/2017/10/31/BCbUr.png
+  [12]: http://ww1.sinaimg.cn/large/0060lm7Tly1fl2khgvzq2j315m040gma.jpg
+  [13]: http://ww4.sinaimg.cn/large/0060lm7Tly1fl2ktqq743j31dw07wjv5.jpg
+  [14]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2kxqwr87j30s804u400.jpg
+  [15]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2ldps7gsj30ss08oac0.jpg
