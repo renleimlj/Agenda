@@ -16,14 +16,15 @@ package cmd
 
 import (
 	"fmt"
-	"../entity"
+	"Agenda/entity"
 	"github.com/spf13/cobra"
+	"Agenda/logger"
 )
 
 // registerCmd represents the register command
 var registerCmd = &cobra.Command{
 	Use:   "register",
-	Short: "A brief description of your command",
+	Short: "--un=UserName --pw=password --email=a@xxx.com --phone=xxxxxx",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -52,6 +53,7 @@ to quickly create a Cobra application.`,
 				fmt.Println("the username is not available")
 			}
 		}
+		logger.Log(username + "register")
 	},
 }
 

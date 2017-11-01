@@ -18,12 +18,13 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
+	
 )
 
 // qmCmd represents the qm command
 var qmCmd = &cobra.Command{
 	Use:   "qm",
-	Short: "A brief description of your command",
+	Short: "",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 

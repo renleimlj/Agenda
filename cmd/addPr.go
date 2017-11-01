@@ -13,15 +13,16 @@
 // limitations under the License.
 
 package cmd
-
 import (
   "github.com/spf13/cobra"
+  "Agenda/logger"
+  "io/ioutil"
 )
 
 // addPrCmd represents the addPr command
 var addPrCmd = &cobra.Command{
   Use:   "addPr",
-  Short: "A brief description of your command",
+  Short: "--title=meeting --pr=participator",
   Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -33,7 +34,10 @@ to quickly create a Cobra application.`,
     prs, _ := cmd.Flags().GetString("pr") 
     prs_arr := strings.Split(prs, ",") 
     for _, each := range prs_arr { 
-      meeting.AddParticipant(title, each) 
+      meeting.AddParticipant(title, each)
+      bytes,_ := ioutil.ReadFile("./CurUser")
+      curuser := string(bytes)
+      logger.Log("'" + curuser + "' called: addPr, title: " + title + ", participators: " + prs)
     }
   },
 }

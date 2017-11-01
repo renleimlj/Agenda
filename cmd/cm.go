@@ -14,14 +14,16 @@
 
 package cmd
 import (
-	"../entity"
+	"Agenda/entity"
 	"github.com/spf13/cobra"
+	"Agenda/logger"
+	"io/ioutil"
 )
 
 // cmCmd represents the cm command
 var cmCmd = &cobra.Command{
 	Use:   "cm",
-	Short: "A brief description of your command",
+	Short: "--title=meeting --pr=participator --st=start_time --et=end_time",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -34,6 +36,9 @@ to quickly create a Cobra application.`,
 		st,_:=cmd.Flags().GetString("st")
 		et,_:=cmd.Flags().GetString("et")
 		entity.CreateMeeting(title, pr, st, et)
+		bytes,_ := ioutil.ReadFile("./CurUser")
+  		curuser := string(bytes)
+		logger.Log("'" + curuser + "' called: cm, title: " + title + ", pr: " + pr + ", starttime: " + st + ", endtime: " + et)
 	},
 }
 

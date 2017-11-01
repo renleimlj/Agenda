@@ -16,14 +16,15 @@ package cmd
 
 import (
 	"fmt"
-	"../entity"
+	"Agenda/entity"
 	"github.com/spf13/cobra"
+	"Agenda/logger"
 )
 
 // loginCmd represents the login command
 var loginCmd = &cobra.Command{
 	Use:   "login",
-	Short: "A brief description of your command",
+	Short: "--un=UserName --pw=password",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -46,6 +47,7 @@ to quickly create a Cobra application.`,
 				fmt.Println("please input correct username and password")
 			}
 		}
+		logger.Log("'" + username + "' log in")
 	},
 }
 

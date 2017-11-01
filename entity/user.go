@@ -17,7 +17,7 @@ func (u *User) Init(name, password, email, phone string) {
 }
 
 func Register(name, password, email, phone string) int {
-	file, err := os.OpenFile("./data/User", os.O_RDWR|os.O_CREATE, 0666)
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
@@ -39,7 +39,7 @@ func Register(name, password, email, phone string) int {
 }
 
 func Login(name, password string) int {
-	file, err := os.OpenFile("./data/User", os.O_RDWR|os.O_CREATE, 0666)
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
@@ -49,14 +49,10 @@ func Login(name, password string) int {
 		decoder.Decode(&users)
 		if users.Name == name { // 存在该用户名
 			if users.Password == password {
-				os.Remove("CurUser")
-				file2, err2 := os.OpenFile("CurUser", os.O_RDWR|os.O_CREATE, 0666)
-				if err2 != nil {
-					panic(err2)
-				}
-				encoder := json.NewEncoder(file2)
-				encoder.Encode(users.Name)
-				file2.Close()
+				f, _ := os.Create("CurUser")
+    			defer f.Close()
+    			_, err := f.WriteString(name)
+    			if err != nil {}
 				file.Close()
 				return 0
 			} else {
@@ -89,7 +85,7 @@ func Logout() int {
 }
 
 func UserExists(username string) bool {
-	file, err := os.OpenFile("./data/User", os.O_RDWR|os.O_CREATE, 0666)
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
@@ -109,7 +105,7 @@ func Query(username string) (string, int) {
 	if b != true {
 		return "falied", 2
 	}
-	file, err := os.OpenFile("./data/User", os.O_RDWR|os.O_CREATE, 0666)
+	file, err := os.OpenFile("User", os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		panic(err)
 	}
