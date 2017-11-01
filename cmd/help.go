@@ -39,6 +39,8 @@ to quickly create a Cobra application.`,
 		fmt.Println("4 login --un=UserName --pw=password")
 		fmt.Println("5 logout")
 		fmt.Println("6 register --un=UserName --pw=password --email=a@xxx.com --phone=xxxxxx")
+		fmt.Println("7 addPr --title=meeting --pr=participator")
+		fmt.Println("8 delPr --title=meeting --pr=participator")
 		fmt.Println("**********************************************************************")
 	},
 }
