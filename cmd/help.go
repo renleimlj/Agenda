@@ -15,13 +15,14 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
-	"../entity"
 )
 
-// delmCmd represents the delm command
-var delmCmd = &cobra.Command{
-	Use:   "delm",
+// helpCmd represents the help command
+var helpCmd = &cobra.Command{
+	Use:   "help",
 	Short: "A brief description of your command",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -30,22 +31,28 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		meeting,_:=cmd.Flags().GetString("title")
-		entity.DeleteMeeting(meeting)
+		//fmt.Println("help called")
+		fmt.Println("**********************************************************************")
+		fmt.Println("1 cm --title=meeting --pr=participator --st=start_time --et=end_time")
+		fmt.Println("2 delm --title=meeting")
+		fmt.Println("3 help")
+		fmt.Println("4 login --un=UserName --pw=password")
+		fmt.Println("5 logout")
+		fmt.Println("6 register --un=UserName --pw=password --email=a@xxx.com --phone=xxxxxx")
+		fmt.Println("**********************************************************************")
 	},
 }
 
 func init() {
-	RootCmd.AddCommand(delmCmd)
+	RootCmd.AddCommand(helpCmd)
 
 	// Here you will define your flags and configuration settings.
 
-	delmCmd.Flags().StringP("title", "t", "Anonymous", "Help message for meeting")
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// delmCmd.PersistentFlags().String("foo", "", "A help for foo")
+	// helpCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// delmCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// helpCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

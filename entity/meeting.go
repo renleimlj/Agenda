@@ -196,7 +196,7 @@ func split(s rune) bool {
 func getAllMeetings() map[string]Meeting {
   originMeetings := map[string]OriginMeeting{}
   allMeetings := map[string]Meeting{}
-  bytes1,_ := ioutil.ReadFile("../data/meetings.json")
+  bytes1,_ := ioutil.ReadFile("./data/meetings.json")
   json.Unmarshal(bytes1, &originMeetings)
   for key, value := range originMeetings {
     var temp Meeting
@@ -222,9 +222,54 @@ func saveAllMeetings(in map[string]Meeting) {
     allMeetings[key] = temp
   }
   bytes, _ := json.Marshal(allMeetings)
-  fout, _ := os.Create("../data/meetings.json")
+  fout, _ := os.Create("./data/meetings.json")
   defer fout.Close()
   fout.Write(bytes)
+}
+
+func TimeConflig2Meeting(meeting1 Meeting, meeting2 Meeting) bool {
+  if meeting1.End < meeting2.Start {
+    return false
+  }
+  if meeting2.End < meeting1.Start {
+    return false
+  }
+  return true
+}
+
+func isParOrSpon(meeting Meeting, name string) bool {
+  if name == meeting.Spon {
+    return true
+  }
+  for value := range meeting.Pr {
+    if meeting.Pr[value] == name {
+        return true
+    }
+  }
+  return false
+}
+
+func TimeConfligWithExisting(meeting Meeting) bool {
+  allMeetings := map[string]Meeting{}
+  allMeetings = getAllMeetings()
+  sponser:=meeting.Spon
+  for _, value := range allMeetings {
+    if isParOrSpon(value, sponser) {
+      if TimeConflig2Meeting(meeting, value) {
+        return true
+      }
+    }
+  }
+  for i := range meeting.Pr {
+    for _, value := range allMeetings {
+      if isParOrSpon(value, meeting.Pr[i]) {
+        if TimeConflig2Meeting(meeting, value) {
+          return true
+        }
+      }
+    }
+  }
+  return false
 }
 
 func CreateMeeting(title string, pr string, st string, et string) {
@@ -249,7 +294,11 @@ func CreateMeeting(title string, pr string, st string, et string) {
     return
   }
 
-  
+  if (st > et) {
+    fmt.Println("Start time should be earlier than end time")
+    return
+  }
+
   var meeting Meeting
   meeting.Title = title
   meeting.Spon = curuser
@@ -257,13 +306,19 @@ func CreateMeeting(title string, pr string, st string, et string) {
   meeting.Start = st
   meeting.End = et
   allMeetings[title] = meeting
+
+  if TimeConfligWithExisting(meeting) {
+    fmt.Println("Sponser or Participators time-conflict with existing meetings")
+    return
+  }
+
+  fmt.Println("Create meeting successfully")
   saveAllMeetings(allMeetings)
 }
 
 func DeleteMeeting(title string) {
-  bytes,_ := ioutil.ReadFile("../CurUser")
+  bytes,_ := ioutil.ReadFile("./CurUser")
   curuser := string(bytes)
-
   allMeetings := map[string]Meeting{}
   allMeetings = getAllMeetings()
   value, exists := allMeetings[title]
