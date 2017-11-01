@@ -196,7 +196,7 @@ func split(s rune) bool {
 func getAllMeetings() map[string]Meeting {
   originMeetings := map[string]OriginMeeting{}
   allMeetings := map[string]Meeting{}
-  bytes1,_ := ioutil.ReadFile("./data/meetings.json")
+  bytes1,_ := ioutil.ReadFile("meetings.json")
   json.Unmarshal(bytes1, &originMeetings)
   for key, value := range originMeetings {
     var temp Meeting
@@ -222,7 +222,7 @@ func saveAllMeetings(in map[string]Meeting) {
     allMeetings[key] = temp
   }
   bytes, _ := json.Marshal(allMeetings)
-  fout, _ := os.Create("./data/meetings.json")
+  fout, _ := os.Create("meetings.json")
   defer fout.Close()
   fout.Write(bytes)
 }
@@ -275,9 +275,8 @@ func TimeConfligWithExisting(meeting Meeting) bool {
 func CreateMeeting(title string, pr string, st string, et string) {
   allMeetings := map[string]Meeting{}
   allMeetings = getAllMeetings()
-  bytes,_ := ioutil.ReadFile("../CurUser")
+  bytes,_ := ioutil.ReadFile("CurUser")
   curuser := string(bytes)
-
 
   temp := strings.FieldsFunc(pr, split)
   for value := range temp {
@@ -317,7 +316,7 @@ func CreateMeeting(title string, pr string, st string, et string) {
 }
 
 func DeleteMeeting(title string) {
-  bytes,_ := ioutil.ReadFile("./CurUser")
+  bytes,_ := ioutil.ReadFile("CurUser")
   curuser := string(bytes)
   allMeetings := map[string]Meeting{}
   allMeetings = getAllMeetings()
