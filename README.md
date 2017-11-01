@@ -1,5 +1,8 @@
 # Agenda
 
+## help
+![此处输入图片的描述][15]
+
 ## 用户注册
 
  1. 注册新用户时，用户需设置一个唯一的用户名和一个密码。另外，还需登记邮箱及电话信息。
@@ -96,3 +99,5 @@
   [12]: http://ww1.sinaimg.cn/large/0060lm7Tly1fl2khgvzq2j315m040gma.jpg
   [13]: http://ww4.sinaimg.cn/large/0060lm7Tly1fl2ktqq743j31dw07wjv5.jpg
   [14]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2kxqwr87j30s804u400.jpg
+  [15]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2ldps7gsj30ss08oac0.jpg
+
