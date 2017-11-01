@@ -16,14 +16,14 @@ package cmd
 
 import (
 	"fmt"
-	"../entity"
+	"Agenda/entity"
 	"github.com/spf13/cobra"
 )
 
 // queryCmd represents the query command
 var queryCmd = &cobra.Command{
 	Use:   "query",
-	Short: "A brief description of your command",
+	Short: "",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 

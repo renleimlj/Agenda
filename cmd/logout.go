@@ -16,14 +16,16 @@ package cmd
 
 import (
 	"fmt"
-	"../entity"
+	"Agenda/entity"
 	"github.com/spf13/cobra"
+	"Agenda/logger"
+	"io/ioutil"
 )
 
 // logoutCmd represents the logout command
 var logoutCmd = &cobra.Command{
 	Use:   "logout",
-	Short: "A brief description of your command",
+	Short: "no parameters",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -31,6 +33,9 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
+		bytes,_ := ioutil.ReadFile("./CurUser")
+  		curuser := string(bytes)
+		logger.Log(curuser + "log out")
 		fmt.Println("logout called")
 		tmp := entity.Logout()
 		if tmp == 1 {

@@ -15,7 +15,7 @@
 package main
 
 import (
-	"./cmd"
+	"Agenda/cmd"
 )
 
 func main() {

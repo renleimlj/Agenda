@@ -16,13 +16,15 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"../entity"
+	"Agenda/entity"
+	"Agenda/logger"
+	"io/ioutil"
 )
 
 // delmCmd represents the delm command
 var delmCmd = &cobra.Command{
 	Use:   "delm",
-	Short: "A brief description of your command",
+	Short: "--title=meeting",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -32,6 +34,9 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		meeting,_:=cmd.Flags().GetString("title")
 		entity.DeleteMeeting(meeting)
+		bytes,_ := ioutil.ReadFile("./CurUser")
+  		curuser := string(bytes)
+		logger.Log("'" + curuser + "' called: delm, title: " + meeting)
 	},
 }
 

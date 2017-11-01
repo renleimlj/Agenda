@@ -49,14 +49,10 @@ func Login(name, password string) int {
 		decoder.Decode(&users)
 		if users.Name == name { // 存在该用户名
 			if users.Password == password {
-				os.Remove("CurUser")
-				file2, err2 := os.OpenFile("CurUser", os.O_RDWR|os.O_CREATE, 0666)
-				if err2 != nil {
-					panic(err2)
-				}
-				encoder := json.NewEncoder(file2)
-				encoder.Encode(users.Name)
-				file2.Close()
+				f, _ := os.Create("CurUser")
+    			defer f.Close()
+    			_, err := f.WriteString(name)
+    			if err != nil {}
 				file.Close()
 				return 0
 			} else {
