@@ -84,6 +84,75 @@
 
 
 
+
+## 查询会议
+
+
+用户输入时间段，agenda查询这个时间段内的所有会议
+ 1. 若该时间段内存在会议，agenda列出时间段内的所有会议。
+ 2. 若该时间段内不存在会议，agenda发出提示。
+ 
+ 以下为json文件中以创建的会议：
+ 
+ ![此处输入图片的描述](http://img.blog.csdn.net/20171102095131425)
+ 
+ 
+ `agenda qm --st=2017-08-01/00:00 --et=2017-12-01/00:00`
+  
+ 
+ `agenda qm --st=1999-01-01/00:00 --et=2000-01-01/00:00`
+
+ 1. 若该时间段内存在会议，agenda列出时间段内的所有会议。
+ 
+ 2. 若该时间段内不存在会议，agenda发出提示。
+ 
+![此处输入图片的描述](http://img.blog.csdn.net/20171102095150701)
+
+
+## 增删会议参与者
+
+
+根据用户输入的会议名和用户名，agenda增删该会议参与者
+ 1. 若该会议存在，agenda增删该会议参与者
+ （1）若删除参与者后，会议参与者人数为零，agenda自动删除该会议
+ 2. 若该会议不存在，agenda发出提示。
+
+
+
+`addPr --title=happy --pr=newpPrhhhhh`
+
+`delPr --title=new --pr=alice`
+
+该会议存在，agenda增删该会议参与者
+
+ ![此处输入图片的描述](http://img.blog.csdn.net/20171102095201796)
+
+以下为增删会议参与者后的json文件：
+
+ ![此处输入图片的描述](http://img.blog.csdn.net/20171102095139174)
+
+
+`addPr --title=fruit --pr=orange`
+
+该会议不存在，agenda发出提示。
+
+ ![此处输入图片的描述](http://img.blog.csdn.net/20171102095206601)
+ 
+ 
+
+`agenda delPr --title=new --pr=bob`
+
+`agenda delPr --title=new --pr=daisy`
+
+删除参与者后，会议参与者人数为零，agenda自动删除该会议
+
+![此处输入图片的描述](http://img.blog.csdn.net/20171102095211205)
+
+以下为agenda自动删除该会议后的json文件：
+
+![此处输入图片的描述](http://img.blog.csdn.net/20171102095144806)
+
+
   [1]: https://s1.ax2x.com/2017/10/31/BCH5S.png
   [2]: https://s1.ax2x.com/2017/10/31/BCVQu.png
   [3]: https://s1.ax2x.com/2017/10/31/BCXUH.png
@@ -98,3 +167,6 @@
   [12]: http://ww1.sinaimg.cn/large/0060lm7Tly1fl2khgvzq2j315m040gma.jpg
   [13]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2pu2nh3fj31b407u421.jpg
   [14]: http://ww2.sinaimg.cn/large/0060lm7Tly1fl2pubbe9lj30oq04mq49.jpg
+
+  
+
